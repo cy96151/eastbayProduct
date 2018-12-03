@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
+from eastbayProduct.items import EastbayproductItem
 
 class EastbaySpider(scrapy.Spider):
     name = 'eastbay'
@@ -11,7 +11,7 @@ class EastbaySpider(scrapy.Spider):
         # 获取商品信息列表
         productList = response.xpath('//div[@id="endeca_search_results"]/ul/li[not(@class="clearRow")]')
         for each_product in productList:
-            item = Test111Item()
+            item = EastbayproductItem()
             item['title'] = each_product.xpath('./a/span[@class="product_title"]/text()').extract_first()
             item['price'] = each_product.xpath('./a/span/span[@class="price"]/text()').extract_first()
             item['sku'] = each_product.xpath('./@data-sku').extract_first()
